@@ -1,0 +1,9 @@
+<!-- interpolation   {{}} -->
+<h1 style="color: red">Welcome to our {{ siteName }}</h1>
+<img [src]="imageSrc" alt="{{ alt }}" />
+<button (click)="clickMe()">click me</button>
+
+conference name: <input type="text" [(ngModel)]="inputItem">
+<h2>le nom tapé est :  {{inputItem}} </h2>
+<br>
+

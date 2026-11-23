@@ -1,0 +1,53 @@
+<h1>Liste des conférences</h1>
+
+<!-- Champ de recherche -->
+<div class="container mb-3">
+  <input type="text"
+         class="form-control"
+         placeholder="Rechercher par titre..."
+         [(ngModel)]="searchItem">
+</div>
+
+<div class="container">
+  @for (conf of filterConf(); track conf.id) {
+    @if (conf.nbPlaces > 0) {
+      <div class="card" style="width: 18rem;">
+        <img [src]="conf.imageUrl" class="card-img-top" alt="conf_image">
+        <div class="card-body">
+          <h5 class="card-title">{{ conf.titre | uppercase }}</h5>
+          <p class="card-text">{{ conf.category }}</p>
+
+          <button class="btn btn-primary" (click)="addFavorite(conf)">
+            Add to favorite
+          </button>
+
+          <button class="btn btn-success mt-2" (click)="liker(conf)">
+            Like ({{ conf.nbLikes }})
+          </button>
+        </div>
+      </div>
+    }
+  } @empty {
+    <h2>Aucune conférence disponible</h2>
+  }
+</div>
+
+<hr>
+
+<h1>Mes favoris ({{ favoritelist().length }})</h1>
+
+<div class="container">
+  @for (conf of favoritelist(); track conf.id) {
+    <div class="card" style="width: 18rem;">
+      <div class="card-body">
+        <h5>{{ conf.titre }}</h5>
+        <p>{{ conf.category }} - {{ conf.nbLikes }} likes</p>
+        <button class="btn btn-danger btn-sm" (click)="removeFavorite(conf)">
+          Retirer
+        </button>
+      </div>
+    </div>
+  } @empty {
+    <h2>Aucun favori pour le moment</h2>
+  }
+</div>
